@@ -5,6 +5,8 @@ SessionController = require 'controllers/session_controller'
 HeaderController = require 'controllers/header_controller'
 Layout = require 'views/layout'
 
+ModuleLoader = require 'module_loader'
+
 # The application object
 module.exports = class Application extends Chaplin.Application
   # Set your application name here so the document title is set to
@@ -18,6 +20,9 @@ module.exports = class Application extends Chaplin.Application
     @initDispatcher()
     @initLayout()
     @initMediator()
+    
+    #extends data sharing/module initialization pub/sub
+    @modelLoader = new ModuleLoader()
 
     # Application-specific scaffold
     @initControllers()
@@ -56,7 +61,7 @@ module.exports = class Application extends Chaplin.Application
   # -------------------------------------
   initMediator: ->
     # Create a user property
-    Chaplin.mediator.user = null
+    mediator.user = null
     # Add additional application-specific properties and methods
     # Seal the mediator
-    Chaplin.mediator.seal()
+    mediator.seal()
