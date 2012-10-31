@@ -33,7 +33,7 @@ module.exports = class ModuleLoader
         @collections[options.id].initDeferred()
         @collections[options.id]['_dispose'] = @collections[options.id].dispose
         @collections[options.id].dispose = null
-        @collections[options.id].init()
+        @collections[options.id].init?()
         mediator.publish "collection:loaded::#{options.id}"
       catch err
         console.log err
